@@ -1,22 +1,20 @@
 	var key = 'd57f3ac24ce946f3a57d42b3c590d0c4';
-	var searchURL = 'http://api.giphy.com/v1/gifs/search';
+	var searchURL = 'https://api.giphy.com/v1/gifs/search';
 	var topics = ['Rick & Morty','Ed, Edd n Eddy','The Simpsons','Voltron','Rugrats','Teenage Mutant Ninja Turtles','Duck Tales','Thundercats','Transformers','Inspector Gadget','Animaniacs','The Flintstones'];
 	
 	$(document).ready(function(){
+		$('#add-button').on('click',function(){
+			event.preventDefault();
+			newVal = $('#addbutton-txt').val().trim();
+			if(newVal != '' && topics.indexOf(newVal) == -1){
+				topics.push(newVal);
+				makeButtons();
+			}
 
-	$('#add-button').on('click',function(){
-		event.preventDefault();
-		newVal = $('#addbutton-txt').val().trim();
-		if(newVal != '' && topics.indexOf(newVal) == -1){
-			topics.push(newVal);
-			makeButtons();
-		}
+		});
 
-	});
-
-	makeButtons()
-	$(document).on('click','img',animation);
-
+		makeButtons();
+		$(document).on('click','img',animation);
 	})
 
 	function makeButtons(){
@@ -55,13 +53,7 @@
 	function animation(img){
 		image = $(this);
 		switchTo = image.attr('data-alt');
-
 		switchFrom = image.attr('src');
-
 		image.attr('src',switchTo);
-
 		image.attr('data-alt',switchFrom);
-		console.log(switchTo);
-		console.log(switchFrom);
-
 	}
